@@ -1,66 +1,92 @@
 <html>
-	<font size="8" color="green">Final test lab</font><br><br>
-	Number of rows: <input type="text" id="t1" /><br><br>
-	Number of cols: <input type="text" id="t2" /><br><br>
-	
-	<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+<font size="8" color="green">Final test lab</font><br><br>
+Number of rows: <input type="text" id="t1" /><br><br>
+Number of cols: <input type="text" id="t2" /><br><br>
 
-	
-	<button id="b2" onclick="addColumn()">Add Column</button>
-	
-	<button id="b3" onclick="addRow()">Add Row</button>
+<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
 
-	<table id="table" style="border: 1px solid black; border-collapse: collapse; margin:auto" cellspacing="0"></table>
-		
-	<script language="javascript">
-		var rowCount = 0;
-		var colCount = 0;
-		function generateTable() {
-			var rows = parseInt(document.getElementById('t1').value);
-			var cols = parseInt(document.getElementById('t2').value);
-			var table = document.getElementById('table');
-			
-			// Clear existing table
-			table.innerHTML = '';
-			rowCount = rows;
-			cellCount = cols;
-			
-			// Generate new table
-			for (var i = 0; i < rows; i++) {
-				var row = table.insertRow(i);
-				for (var j = 0; j < cols; j++) {
-					var cell = row.insertCell(j);
-					cell.innerHTML = "Row " + (i+1) + ", Column " + (j+1);
-					cell.style.border = "1px solid black"; 
-				}
+
+<button id="b2" onclick="addColumn()">Add Column</button>
+
+<button id="b3" onclick="addRow()">Add Row</button>
+
+<table id="table" style="border: 1px solid black; border-collapse: collapse; margin:auto" cellspacing="0"></table>
+
+<script language="javascript">
+	var rowCount = 0;
+	var colCount = 0;
+
+
+	// Function to generate table
+	function generateTable() {
+		const numRows = parseInt(document.getElementById('t1').value);
+		const numCols = parseInt(document.getElementById('t2').value);
+		rowCount = numRows;
+		// Create table element
+		const table = document.createElement('table');
+		table.id = 'myTable'; 
+		table.style.borderCollapse = 'collapse';
+		table.style.margin = 'auto';
+
+		// Create rows and columns for the table
+		for (let i = 0; i < numRows; i++) {
+			const row = document.createElement('tr');
+			for (let j = 0; j < numCols; j++) {
+				const cell = document.createElement('td');
+				cell.textContent = "Row " + (i) + ", Column " + j; 
+				cell.style.border = '1px solid black'; 
+				cell.style.padding = '10px'; 
 			}
-			
+			table.appendChild(row);
 		}
 
-		function addColumn() {
-			var table = document.getElementById('table');
-			var rows = table.rows;
-			colCount = table.rows[0].cells.length + 1; 
-		
-			for (var i = 0; i < rows.length; i++) {
-				var cell = rows[i].insertCell(-1);
-				cell.innerHTML = "Row " + (i + 1) + ", Column " + colCount;
-				cell.style.border = "1px solid black"; 
-			}
-		}
-		function addRow() {
-			var table = document.getElementById('table');
-			rowCount++;
-			var row = table.insertRow(-1);
-			var cols = table.rows[0].cells.length;
-			for (var i = 0; i < cols; i++) {
-				var cell = row.insertCell(i);
-				cell.innerHTML = "Row " + rowCount + ", Column " + (i+1);
-				cell.style.border = "1px solid black"; 
-			}
-		}
-		
+		// Remove all elements from the HTML body
+		document.body.innerHTML = '';
 
-	</script>
-	
+		// Display table
+		document.body.appendChild(table);
+
+		// Create Add Column button
+		const addColumnButton = document.createElement('button');
+		addColumnButton.textContent = 'Add Column';
+		addColumnButton.id = 'b2';
+		addColumnButton.onclick = addColumn;
+		document.body.appendChild(addColumnButton);
+
+		// Create Add Row button
+		const addRowButton = document.createElement('button');
+		addRowButton.textContent = 'Add Row';
+		addRowButton.id = 'b3';
+		addRowButton.onclick = addRow;
+		document.body.appendChild(addRowButton);
+	}
+
+	function addColumn() {
+		var table = document.getElementById('myTable');
+		var rows = table.rows;
+		colCount = table.rows[0].cells.length + 1;
+
+		for (var i = 0; i < rows.length; i++) {
+			var cell = rows[i].insertCell(-1);
+			cell.innerHTML = "Row " + (i) + ", Column " + colCount;
+			cell.style.border = "1px solid black";
+			cell.style.padding = '10px';
+		}
+	}
+
+	function addRow() {
+		var table = document.getElementById('myTable');
+		
+		var row = table.insertRow(-1);
+		var cols = table.rows[0].cells.length;
+		for (var i = 0; i < cols; i++) {
+			var cell = row.insertCell(i);
+			cell.innerHTML = "Row " +rowCount + ", Column " + (i);
+			cell.style.border = "1px solid black";
+			cell.style.padding = '10px';
+		}
+		rowCount++;
+	}
+</script>
+
 </html>
