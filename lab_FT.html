@@ -13,7 +13,8 @@
 	<table id="table" style="border: 1px solid black; border-collapse: collapse; margin:auto" cellspacing="0"></table>
 		
 	<script language="javascript">
-		
+		var rowCount = 0;
+		var colCount = 0;
 		function generateTable() {
 			var rows = parseInt(document.getElementById('t1').value);
 			var cols = parseInt(document.getElementById('t2').value);
@@ -21,6 +22,8 @@
 			
 			// Clear existing table
 			table.innerHTML = '';
+			rowCount = rows;
+			cellCount = cols;
 			
 			// Generate new table
 			for (var i = 0; i < rows; i++) {
@@ -32,26 +35,31 @@
 				}
 			}
 			
-			// Hide input fields and generate button
-			document.getElementById('t1').style.display = 'none';
-			document.getElementById('t2').style.display = 'none';
-			document.getElementById('b1').style.display = 'none';
 		}
 
 		function addColumn() {
 			var table = document.getElementById('table');
 			var rows = table.rows;
-			console.log(rows);
-			var colIndex = (table.rows[0].cells.length)+1;
-			console.log(typeof(colIndex));
+			colCount = table.rows[0].cells.length + 1; 
 		
 			for (var i = 0; i < rows.length; i++) {
 				var cell = rows[i].insertCell(-1);
-				cell.innerHTML = "Row " + (i + 1) + ", Column " + (colIndex);
-				cell.style.border = "1px solid black"; // Add cell border
+				cell.innerHTML = "Row " + (i + 1) + ", Column " + colCount;
+				cell.style.border = "1px solid black"; 
 			}
 		}
-
+		function addRow() {
+			var table = document.getElementById('table');
+			rowCount++;
+			var row = table.insertRow(-1);
+			var cols = table.rows[0].cells.length;
+			for (var i = 0; i < cols; i++) {
+				var cell = row.insertCell(i);
+				cell.innerHTML = "Row " + rowCount + ", Column " + (i+1);
+				cell.style.border = "1px solid black"; 
+			}
+		}
+		
 
 	</script>
 	
