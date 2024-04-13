@@ -4,15 +4,39 @@
 	Number of cols: <input type="text" id="t2" /><br><br>
 	
 	<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+
 	
 	<button id="b2" onclick="addColumn()">Add Column</button>
 	
 	<button id="b3" onclick="addRow()">Add Row</button>
+
+	<table id="table" style="border: 1px solid black; border-collapse: collapse; margin: 2px" cellspacing="0"></table>
 		
 	<script language="javascript">
 		
-		//Your code goes here
-	
+		function generateTable() {
+			var rows = parseInt(document.getElementById('t1').value);
+			var cols = parseInt(document.getElementById('t2').value);
+			var table = document.getElementById('table');
+			
+			// Clear existing table
+			table.innerHTML = '';
+			
+			// Generate new table
+			for (var i = 0; i < rows; i++) {
+				var row = table.insertRow(i);
+				for (var j = 0; j < cols; j++) {
+					var cell = row.insertCell(j);
+					cell.innerHTML = "Row " + (i+1) + ", Column " + (j+1);
+					cell.style.border = "1px solid black"; 
+				}
+			}
+			
+			// Hide input fields and generate button
+			document.getElementById('t1').style.display = 'none';
+			document.getElementById('t2').style.display = 'none';
+			document.getElementById('b1').style.display = 'none';
+		}
 	</script>
 	
 </html>
