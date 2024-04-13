@@ -10,7 +10,7 @@
 	
 	<button id="b3" onclick="addRow()">Add Row</button>
 
-	<table id="table" style="border: 1px solid black; border-collapse: collapse; margin: 2px" cellspacing="0"></table>
+	<table id="table" style="border: 1px solid black; border-collapse: collapse; margin:auto" cellspacing="0"></table>
 		
 	<script language="javascript">
 		
@@ -37,6 +37,22 @@
 			document.getElementById('t2').style.display = 'none';
 			document.getElementById('b1').style.display = 'none';
 		}
+
+		function addColumn() {
+			var table = document.getElementById('table');
+			var rows = table.rows;
+			console.log(rows);
+			var colIndex = (table.rows[0].cells.length)+1;
+			console.log(typeof(colIndex));
+		
+			for (var i = 0; i < rows.length; i++) {
+				var cell = rows[i].insertCell(-1);
+				cell.innerHTML = "Row " + (i + 1) + ", Column " + (colIndex);
+				cell.style.border = "1px solid black"; // Add cell border
+			}
+		}
+
+
 	</script>
 	
 </html>
